@@ -1,7 +1,7 @@
 function [force_velocity_scale_factor] = force_velocity_muscle(vm)
 
 % Input Parameters
-% vm: muscle (contractile element) velocity)
+% vm: muscle (contractile element) velocity
 
 % Output
 % force-velocity scale factor
