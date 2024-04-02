@@ -15,8 +15,10 @@ function [jointAngles] = selectJointAngles( crankAngle )
         i = 2;
     else if crankAngle == 120
         i = 3;
-    else
+    else if
         i = 4;
+    else
+        error('Not a valid crank angle');
     end
 
     jointAngles = ( [jointAnglesMatrix(i, 1), jointAnglesMatrix(i, 2)] );
@@ -29,7 +31,7 @@ function [activationValues] = getActivationValues( crankAngle )
           60, .379, .477, .283
           90, .610, .196, .628
           120, .992, .165, .924
-          150, .639, .114, .725 ];
+          150, .639, .114, .725 ]; %second column is bf, third column is rf, fourth column is gas
     
     int i = 0;
     if crankAngle == 30
@@ -59,4 +61,6 @@ function [restingMuscleTendonLengths] = getRestingLengths( muscle )
     else
         error('Not a valid muscle input');
     end
+
+    %first column is resting muscle length, second column is resting tendon length
 end
