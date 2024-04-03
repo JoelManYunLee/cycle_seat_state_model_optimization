@@ -1,7 +1,7 @@
 function [hipAngles, kneeAngles] = selectJointAngles( crankAngle )
     jointAnglesMatrix = [ 30 69.65 101.23; 60 63.47 86.03; 90 52.98 68.09; 120 41.08 51.46; 150 29.91 39.20 ]; %second column is for hip angle, third column is for knee angle
     
-    int i = 1;
+    i = 1;
     if crankAngle == 30
         i = 1;
     elseif crankAngle == 60
