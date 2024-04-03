@@ -27,7 +27,7 @@ function [hipAngles, kneeAngles] = selectJointAngles( crankAngle )
 
 end
 
-function [activationValues] = getActivationValues( crankAngle )
+function [bfValue, rfValue, gasValue] = getActivationValues( crankAngle )
     activationValuesMatrix =
         [ 30, .262, .658, .124
           60, .379, .477, .283
@@ -50,7 +50,11 @@ function [activationValues] = getActivationValues( crankAngle )
         error('Not a valid crank angle')
     end
 
-    activationValues = ( [activationValuesMatrix(i, 2), activationValuesMatrix(i, 3), activationValuesMatrix(i, 4)] );
+    % activationValues = ( [activationValuesMatrix(i, 2), activationValuesMatrix(i, 3), activationValuesMatrix(i, 4)] );
+    bfValue = activationValuesMatrix(i, 2);
+    rfValue = activationValuesMatrix(i, 3);
+    gasValue = activationValuesMatrix(i, 4);
+
 end
 
 function [restingMuscleTendonLengths] = getRestingLengths( muscle )
