@@ -10,7 +10,7 @@ for i = 1:numAngles
     [hipAngles(i), kneeAngles(i)] = selectJointAngles(crankAngleMatrix(i));
 end
 
-jointAnglesMatrix = [crankAngleMatrix', hipAngles, kneeAngles];
+jointAnglesMatrix = [crankAngleMatrix, hipAngles, kneeAngles];
 disp(jointAnglesMatrix);
 
 muscleMatrix = ['biceps_femoris', 'rectus_femoris', 'gastrocnemius'];
