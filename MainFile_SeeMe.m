@@ -52,6 +52,11 @@ for j = 2:numJoints % Excluding hip
     end
 end
 
+% Col 1: Crank angle
+% Col 2: Muscle (1 = bf, 2 = rf, 3 = g)
+% Col 3: Joint (1 = hip, 2 = knee)
+% Col 4: Joint angle
+% Col 5: Change in muscle length
 disp(resultMatrix);
 
 
