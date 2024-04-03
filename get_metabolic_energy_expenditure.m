@@ -1,7 +1,11 @@
-function [E_dot] = get_energy_expenditure(L_dot, L0, F0, alpha, max_velocity)
+function [E_dot] = get_metabolic_energy_expenditure(L_dot, L0, F0, alpha, max_velocity)
 
 % Input Parameters
 % L_dot: Rate of change of the contractile element length
+% L0: 
+% F0: 
+% alpha:
+% max_velocity:
 
 % Output
 % E_dot: The rate of metabolic energy expenditure in the muscle
