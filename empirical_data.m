@@ -15,7 +15,7 @@ function [jointAngles] = selectJointAngles( crankAngle )
         i = 2;
     else if crankAngle == 120
         i = 3;
-    else if
+    else if crankAngle == 150
         i = 4;
     else
         error('Not a valid crank angle');
