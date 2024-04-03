@@ -1,4 +1,4 @@
-function [jointAngles] = selectJointAngles( crankAngle )
+function [hipAngles, kneeAngles] = selectJointAngles( crankAngle )
     jointAnglesMatrix = 
         [ 30, 69.65, 101.23
           60, 63.47, 86.03
@@ -21,7 +21,9 @@ function [jointAngles] = selectJointAngles( crankAngle )
         error('Not a valid crank angle');
     end
 
-    jointAngles = ( [jointAnglesMatrix(i, 2), jointAnglesMatrix(i, 3)] );
+    % jointAngles = ( [jointAnglesMatrix(i, 2), jointAnglesMatrix(i, 3)] );
+    hipAngles = jointAnglesMatrix(i,2);
+    kneeAngles = jointAnglesMatrix(i,3);
 
 end
 
