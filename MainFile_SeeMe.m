@@ -1,18 +1,17 @@
-
 clear
 clc
 
 crankAngleMatrix = [30, 60, 90, 120, 150];
-hipJointAngleMatrix = zeros(5,1);
-kneeJointAngleMatrix = zeros(5,1);
-% Getting joint angles
-for i = 1:length(crankAngleMatrix)
-    hipJointAngleMatrix(i) = selectJointAngles(crankAngleMatrix(i,1)); 
-    kneeJointAngleMatrix(i) = selectJointAngles(crankAngleMatrix(i,2));
-end 
+numAngles = length(crankAngleMatrix);
+hipAngles = zeros(numAngles, 1);
+kneeAngles = zeros(numAngles, 1);
 
-hipJointAngleMatrix 
-kneeJointAngleMatrix 
+for i = 1:numAngles
+    [hipAngles(i), kneeAngles(i)] = selectJointAngles(crankAngleMatrix(i));
+end
+
+jointAnglesMatrix = [crankAngleMatrix', hipAngles, kneeAngles];
+disp(jointAnglesMatrix);
 
 muscleMatrix = ['biceps_femoris', 'rectus_femoris', 'gastrocnemius'];
 jointMatrix = ['hip', 'knee'];
