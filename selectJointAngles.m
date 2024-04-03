@@ -1,17 +1,16 @@
 function [hipAngles, kneeAngles] = selectJointAngles( crankAngle )
-    jointAnglesMatrix = 
-        [ 30 69.65 101.23; 60 63.47 86.03; 90 52.98 68.09; 120 41.08 51.46; 150 29.91 39.20 ]; %second column is for hip angle, third column is for knee angle
+    jointAnglesMatrix = [ 30 69.65 101.23; 60 63.47 86.03; 90 52.98 68.09; 120 41.08 51.46; 150 29.91 39.20 ]; %second column is for hip angle, third column is for knee angle
     
     int i = 1;
     if crankAngle == 30
         i = 1;
-    else if crankAngle == 60
+    elseif crankAngle == 60
         i = 2;
-    else if crankAngle == 90
+    elseif crankAngle == 90
         i = 3;
-    else if crankAngle == 120
+    elseif crankAngle == 120
         i = 4;
-    else if crankAngle == 150
+    elseif crankAngle == 150
         i = 5;
     else
         error('Not a valid crank angle');
