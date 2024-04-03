@@ -1,4 +1,4 @@
-function [hipAngles, kneeAngles] = selectJointAngles( crankAngle )
+function [hipAngle, kneeAngle] = selectJointAngles( crankAngle )
     jointAnglesMatrix = [ 30 69.65 101.23; 60 63.47 86.03; 90 52.98 68.09; 120 41.08 51.46; 150 29.91 39.20 ]; %second column is for hip angle, third column is for knee angle
     
     i = 1;
@@ -17,7 +17,7 @@ function [hipAngles, kneeAngles] = selectJointAngles( crankAngle )
     end
 
     % jointAngles = ( [jointAnglesMatrix(i, 2), jointAnglesMatrix(i, 3)] );
-    hipAngles = jointAnglesMatrix(i,2);
-    kneeAngles = jointAnglesMatrix(i,3);
+    hipAngle = jointAnglesMatrix(i,2);
+    kneeAngle = jointAnglesMatrix(i,3);
 
 end
