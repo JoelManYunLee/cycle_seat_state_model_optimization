@@ -1,3 +1,4 @@
+%% Section 1: Get hip and knee angles
 clear
 clc
 
@@ -13,6 +14,7 @@ end
 jointAnglesMatrix = [crankAngleMatrix, hipAngles, kneeAngles];
 disp(jointAnglesMatrix);
 
+%% Section 2: Get collection of associated muscle length changes in each muscle at each crank angle.
 muscleMatrix = {'biceps_femoris', 'rectus_femoris', 'gastrocnemius'};
 jointMatrix = {'hip', 'knee'};
 numAngles = size(jointAnglesMatrix, 1);
@@ -59,6 +61,20 @@ end
 % Col 5: Change in muscle length
 disp(resultMatrix);
 
+% Display the modified matrix
+disp('Modified resultMatrix:');
+disp(resultMatrix);
+
+%% Section 3: Get activation values
+clc
+
+activationValues = zeros(numAngles,3);
+
+for i = 1:numAngles
+    [activationValues(i,1), activationValues(i,2), activationValues(i,3)] = getActivationValues(crankAngleMatrix(i));
+end
+
+disp(activationValues)
 
 %% Section 5: Testing
 clc
