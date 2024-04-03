@@ -1,7 +1,7 @@
 clear
 clc
 
-crankAngleMatrix = [30, 60, 90, 120, 150];
+crankAngleMatrix = [30; 60; 90; 120; 150];
 numAngles = length(crankAngleMatrix);
 hipAngles = zeros(numAngles, 1);
 kneeAngles = zeros(numAngles, 1);
