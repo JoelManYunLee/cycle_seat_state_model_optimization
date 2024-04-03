@@ -6,22 +6,22 @@ function [jointAngles] = selectJointAngles( crankAngle )
           120, 41.08, 51.46
           150, 29.91, 39.20 ]; %second column is for hip angle, third column is for knee angle
     
-    int i = 0;
+    int i = 1;
     if crankAngle == 30
-        i = 0;
-    else if crankAngle == 60
         i = 1;
-    else if crankAngle == 90
+    else if crankAngle == 60
         i = 2;
-    else if crankAngle == 120
+    else if crankAngle == 90
         i = 3;
-    else if crankAngle == 150
+    else if crankAngle == 120
         i = 4;
+    else if crankAngle == 150
+        i = 5;
     else
         error('Not a valid crank angle');
     end
 
-    jointAngles = ( [jointAnglesMatrix(i, 1), jointAnglesMatrix(i, 2)] );
+    jointAngles = ( [jointAnglesMatrix(i, 2), jointAnglesMatrix(i, 3)] );
 
 end
 
@@ -33,22 +33,22 @@ function [activationValues] = getActivationValues( crankAngle )
           120, .992, .165, .924
           150, .639, .114, .725 ]; %second column is bf, third column is rf, fourth column is gas
     
-    int i = 0;
+    int i = 1;
     if crankAngle == 30
-        i = 0;
-    else if crankAngle == 60
         i = 1;
-    else if crankAngle == 90
+    else if crankAngle == 60
         i = 2;
-    else if crankAngle == 120
+    else if crankAngle == 90
         i = 3;
-    else if crankAngle == 150
+    else if crankAngle == 120
         i = 4;
+    else if crankAngle == 150
+        i = 5;
     else    
         error('Not a valid crank angle')
     end
 
-    activationValues = ( [activationValuesMatrix(i, 1), activationValuesMatrix(i, 2), activationValuesMatrix(i, 3)] );
+    activationValues = ( [activationValuesMatrix(i, 2), activationValuesMatrix(i, 3), activationValuesMatrix(i, 4)] );
 end
 
 function [restingMuscleTendonLengths] = getRestingLengths( muscle )
