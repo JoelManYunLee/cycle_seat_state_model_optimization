@@ -22,7 +22,7 @@ function [force_length_regression] = get_muscle_force_length_regression()
 % Regression with "fit" function with "gauss2" option as model type
 
 % Extract data from csv
-data = csvread("Dataset.csv");
+data = csvread("Normalized_Data.csv");
 
 % Extract independent and dependent variables
 muscle_length = data(:, 1);
