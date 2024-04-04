@@ -93,7 +93,7 @@ resultMatrix = [resultMatrix newColumn]; % Append on another 2 columns
 
 for i = 1:length(resultMatrix)
     resultMatrix(i,7) = get_max_shortening_velocity(resultMatrix(i,6)); % Find Vmax using activation value
-    %resultMatrix(i,8) = get_optimal_muscle_length(); % NEED THE CSV IN THE FOLDER
+    resultMatrix(i,8) = get_optimal_muscle_length(); % NEED THE CSV IN THE FOLDER
 end
 
 %% Section 5: Testing
