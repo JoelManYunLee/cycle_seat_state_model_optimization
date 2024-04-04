@@ -76,6 +76,14 @@ end
 
 disp(activationValues)
 
+newColumn = zeros(25,1); % New column for results matrix
+resultMatrix = [resultMatrix newColumn]; % Append on another column
+tempA = zeros(1,3); % Temp array to fill in activation values
+for i = 1:length(resultMatrix) %Loop through and fill in activation values
+    [tempA(1), tempA(2), tempA(3)] = getActivationValues(resultMatrix(i,1));
+    resultMatrix(i,6) = tempA(resultMatrix(i, 2)); % Fill in value based on the muscle type
+end
+
 %% Section 5: Testing
 clc
 
