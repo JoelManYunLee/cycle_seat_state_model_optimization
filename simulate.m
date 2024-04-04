@@ -10,13 +10,8 @@ function simulate(T, f0M, resting_length_muscle, resting_length_tendon, RelTol, 
 muscle = HillTypeMuscle(100, 0.3, 0.1);
 
 %%% TASK 2
-    function velocity = get_muscle_velocity(time, norm_lm)
-        % Determine a based on time
-        if time < 0.5
-            a = 0;
-        else
-            a = 1;
-        end
+    function velocity = get_muscle_velocity(alpha, norm_lm)
+        a = alpha;
         
         % Modifying properties
         muscle.resting_length_muscle = resting_length_muscle;
@@ -43,7 +38,7 @@ tspan = [0 T];
 x0 = 1;
 
 opts = odeset('RelTol',RelTol,'AbsTol', AbsTol);
-[time, norm_lm] = ode45(@get_muscle_velocity, tspan, x0, opts);
+[alpha, norm_lm] = ode45(@get_muscle_velocity, tspan, x0, opts);
 
 %%% TASK 4
 % save the estimated forces in a vector called "forces"
@@ -68,13 +63,13 @@ LineWidth = 1.5;
 FontSize = 12;
 
 subplot(2,1,1)
-plot(time, norm_lm, 'LineWidth', LineWidth)
+plot(alpha, norm_lm, 'LineWidth', LineWidth)
 xlabel('Time (s)')
 ylabel('Normalized CE Length (m)')
 set(gca,'FontSize', FontSize)
 
 subplot(2,1,2)
-plot(time, forces, 'LineWidth', LineWidth)
+plot(alpha, forces, 'LineWidth', LineWidth)
 xlabel('Time (s)')
 ylabel('CE Tension (N)')
 set(gca,'FontSize', FontSize)

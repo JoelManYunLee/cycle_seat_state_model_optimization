@@ -2,8 +2,8 @@ function [E_dot] = get_metabolic_energy_expenditure(L_dot, L0, F0, alpha, max_ve
 
 % Input Parameters
 % L_dot: Rate of change of the contractile element length
-% L0: The original resting muscle length
-% F0: The original force applied
+% L0: The optimum muscle length to produce the maximum force
+% F0: the peak isometric force
 % alpha: The activation energy
 % max_velocity: The max velocity of of the contractile element
 

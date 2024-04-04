@@ -61,20 +61,8 @@ end
 % Col 5: Change in muscle length
 disp(resultMatrix);
 
-% Display the modified matrix
-disp('Modified resultMatrix:');
-disp(resultMatrix);
-
 %% Section 3: Get activation values
 clc
-
-activationValues = zeros(numAngles,3);
-
-for i = 1:numAngles
-    [activationValues(i,1), activationValues(i,2), activationValues(i,3)] = getActivationValues(crankAngleMatrix(i));
-end
-
-disp(activationValues)
 
 % Column 6 is activation values
 newColumn = zeros(length(resultMatrix),1); % New column for results matrix
@@ -84,6 +72,8 @@ for i = 1:length(resultMatrix) %Loop through and fill in activation values
     [tempA(1), tempA(2), tempA(3)] = getActivationValues(resultMatrix(i,1));
     resultMatrix(i,6) = tempA(resultMatrix(i, 2)); % Fill in value based on the muscle type
 end
+
+disp(resultMatrix)
 %% Section 4: Get optimal length (L0) and Vmax
 
 % Column 7 is Vmax
