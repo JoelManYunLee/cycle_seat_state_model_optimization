@@ -8,6 +8,8 @@ function [Vcc] = better_simulate(f0M, resting_length_muscle, resting_length_tend
     
     %%% TASK 1  
     muscle = HillTypeMuscle(f0M, resting_length_muscle/1000, resting_length_tendon/1000);
+
+    Vcc = get_muscle_velocity(alpha, norm_length);
     
     %%% TASK 2
         function velocity = get_muscle_velocity(alpha, norm_lm)
@@ -26,6 +28,4 @@ function [Vcc] = better_simulate(f0M, resting_length_muscle, resting_length_tend
             % Calculate velocity using get_velocity
             velocity = get_velocity(a, norm_lm, norm_lt);
         end
-
-    Vcc = get_muscle_velocity(alpha, norm_length);
 end
