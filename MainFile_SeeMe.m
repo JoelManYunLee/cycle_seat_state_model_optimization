@@ -96,13 +96,13 @@ resultMatrix = [resultMatrix newColumn]; % Append on another column
 
 for i = 1:length(resultMatrix)
     if resultMatrix(i,2) == 1
-        [BF_resting_lengths(1), BF_resting_lengths(2)] = getRestingLengths('bf');
+        [BF_resting_lengths(1), BF_resting_lengths(2)] = getRestingLengths(resultMatrix(i,2));
         resultMatrix(i,9) = (BF_resting_lengths(1)+resultMatrix(i,5))/BF_resting_lengths(1);
     elseif resultMatrix(i,2) == 2
-        [RF_resting_lengths(1), RF_resting_lengths(2)] = getRestingLengths('rf');
+        [RF_resting_lengths(1), RF_resting_lengths(2)] = getRestingLengths(resultMatrix(i,2));
         resultMatrix(i,9) = (RF_resting_lengths(1)+resultMatrix(i,5))/RF_resting_lengths(1);
     elseif resultMatrix(i,2) == 3
-        [G_resting_lengths(1), G_resting_lengths(2)] = getRestingLengths('gas');
+        [G_resting_lengths(1), G_resting_lengths(2)] = getRestingLengths(resultMatrix(i,2));
         resultMatrix(i,9) = (G_resting_lengths(1)+resultMatrix(i,5))/G_resting_lengths(1);
     else
         error('Not a valid muscle input');
