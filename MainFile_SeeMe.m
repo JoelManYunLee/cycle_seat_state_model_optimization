@@ -104,6 +104,8 @@ for i = 1:length(resultMatrix)
     elseif resultMatrix(i,2) == 3
         [G_resting_lengths(1), G_resting_lengths(2)] = getRestingLengths('gas');
         resultMatrix(i,9) = (G_resting_lengths(1)+resultMatrix(i,5))/G_resting_lengths(1);
+    else
+        error('Not a valid muscle input');
     end
 end
 
