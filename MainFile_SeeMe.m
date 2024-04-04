@@ -87,6 +87,7 @@ for i = 1:length(resultMatrix)
 end
 
 %% Section: Normalizing lengths (column 9) and adding in velocities (column 10)
+clc
 BF_resting_lengths = zeros(1,2);
 RF_resting_lengths = zeros(1,2);
 G_resting_lengths = zeros(1,2);
