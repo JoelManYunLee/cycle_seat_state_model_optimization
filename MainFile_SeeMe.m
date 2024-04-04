@@ -86,24 +86,28 @@ for i = 1:length(resultMatrix)
     resultMatrix(i,8) = get_optimal_muscle_length(); % NEED THE CSV IN THE FOLDER
 end
 
-%% Section: Normalizing lengths
+%% Section: Normalizing lengths (column 9) and adding in velocities (column 10)
 BF_resting_lengths = zeros(1,2);
 RF_resting_lengths = zeros(1,2);
 G_resting_lengths = zeros(1,2);
+f0M = 100; % PROBABLY NEED TO CHANGE, I DUNNO
 
-newColumn = zeros(length(resultMatrix),1); % New column for results matrix
-resultMatrix = [resultMatrix newColumn]; % Append on another column
+newColumn = zeros(length(resultMatrix),2); % New 2 columns for results matrix
+resultMatrix = [resultMatrix newColumn]; % Append on another 2 columns
 
 for i = 1:length(resultMatrix)
     if resultMatrix(i,2) == 1
         BF_resting_lengths = getRestingLengths(resultMatrix(i,2));
-        resultMatrix(i,9) = (BF_resting_lengths(1)+resultMatrix(i,5))/BF_resting_lengths(1);
+        resultMatrix(i,9) = (BF_resting_lengths(1)+resultMatrix(i,5))/BF_resting_lengths(1); % Normalized length
+        resultMatrix(i,10) = better_simulate(f0M, BF_resting_lengths(1), BF_resting_lengths(2), resultMatrix(i,6), resultMatrix(i,9)); % Velocity
     elseif resultMatrix(i,2) == 2
         RF_resting_lengths = getRestingLengths(resultMatrix(i,2));
-        resultMatrix(i,9) = (RF_resting_lengths(1)+resultMatrix(i,5))/RF_resting_lengths(1);
+        resultMatrix(i,9) = (RF_resting_lengths(1)+resultMatrix(i,5))/RF_resting_lengths(1); % Normalized length
+        resultMatrix(i,10) = better_simulate(f0M, RF_resting_lengths(1), RF_resting_lengths(2), resultMatrix(i,6), resultMatrix(i,9)); % Velocity
     elseif resultMatrix(i,2) == 3
         G_resting_lengths = getRestingLengths(resultMatrix(i,2));
-        resultMatrix(i,9) = (G_resting_lengths(1)+resultMatrix(i,5))/G_resting_lengths(1);
+        resultMatrix(i,9) = (G_resting_lengths(1)+resultMatrix(i,5))/G_resting_lengths(1); % Normalized length
+        resultMatrix(i,10) = better_simulate(f0M, G_resting_lengths(1), G_resting_lengths(2), resultMatrix(i,6), resultMatrix(i,9));
     else
         error('Not a valid muscle input');
     end
