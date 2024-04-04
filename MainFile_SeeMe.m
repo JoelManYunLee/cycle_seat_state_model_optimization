@@ -76,6 +76,26 @@ end
 
 disp(activationValues)
 
+% Column 6 is activation values
+newColumn = zeros(length(resultMatrix),1); % New column for results matrix
+resultMatrix = [resultMatrix newColumn]; % Append on another column
+tempA = zeros(1,3); % Temp array to fill in activation values
+for i = 1:length(resultMatrix) %Loop through and fill in activation values
+    [tempA(1), tempA(2), tempA(3)] = getActivationValues(resultMatrix(i,1));
+    resultMatrix(i,6) = tempA(resultMatrix(i, 2)); % Fill in value based on the muscle type
+end
+%% Section 4: Get optimal length (L0) and Vmax
+
+% Column 7 is Vmax
+% Column 8 is L0
+newColumn = zeros(length(resultMatrix),2); % New 2 column for results matrix
+resultMatrix = [resultMatrix newColumn]; % Append on another 2 columns
+
+for i = 1:length(resultMatrix)
+    resultMatrix(i,7) = get_max_shortening_velocity(resultMatrix(i,6)); % Find Vmax using activation value
+    %resultMatrix(i,8) = get_optimal_muscle_length(); % NEED THE CSV IN THE FOLDER
+end
+
 %% Section 5: Testing
 clc
 
