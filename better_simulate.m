@@ -28,4 +28,4 @@ function [Vcc] = better_simulate(f0M, resting_length_muscle, resting_length_tend
         end
 
     Vcc = get_muscle_velocity(alpha, norm_length);
- 
+end
