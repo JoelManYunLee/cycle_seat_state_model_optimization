@@ -26,6 +26,6 @@ function [Vcc] = better_simulate(f0M, resting_length_muscle, resting_length_tend
             norm_lt = muscle.norm_tendon_length(muscle_tendon_length, norm_lm);
     
             % Calculate velocity using get_velocity
-            velocity = get_velocity(a, norm_lm, norm_lt);
+            velocity = get_velocity(alpha, norm_lm, norm_lt);
         end
 end
