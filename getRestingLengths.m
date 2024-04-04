@@ -1,9 +1,9 @@
 function [restingMuscleTendonLengths] = getRestingLengths( muscle )
-    if muscle == "bf"
+    if muscle == 1 % 1 is BF
         restingMuscleTendonLengths = [316, 92];
-    else if muscle == "rf"
+    elseif muscle == 2 % 2 is BF
         restingMuscleTendonLengths = [349.7, 51.7];
-    else if muscle == "gas"
+    elseif muscle == 3 % 3 is GAS
         restingMuscleTendonLengths = [241, 212];
     else
         error('Not a valid muscle input');
