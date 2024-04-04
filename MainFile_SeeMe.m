@@ -86,6 +86,27 @@ for i = 1:length(resultMatrix)
     resultMatrix(i,8) = get_optimal_muscle_length(); % NEED THE CSV IN THE FOLDER
 end
 
+%% Section: Normalizing lengths
+BF_resting_lengths = zeros(1,2);
+RF_resting_lengths = zeros(1,2);
+G_resting_lengths = zeros(1,2);
+
+newColumn = zeros(length(resultMatrix),1); % New column for results matrix
+resultMatrix = [resultMatrix newColumn]; % Append on another column
+
+for i = 1:length(resultMatrix)
+    if resultMatrix(i,2) == 1
+        [BF_resting_lengths(1), BF_resting_lengths(2)] = getRestingLengths('bf');
+        resultMatrix(i,9) = (BF_resting_lengths(1)+resultMatrix(i,5))/BF_resting_lengths(1);
+    elseif resultMatrix(i,2) == 2
+        [RF_resting_lengths(1), RF_resting_lengths(2)] = getRestingLengths('rf');
+        resultMatrix(i,9) = (RF_resting_lengths(1)+resultMatrix(i,5))/RF_resting_lengths(1);
+    elseif resultMatrix(i,2) == 3
+        [G_resting_lengths(1), G_resting_lengths(2)] = getRestingLengths('gas');
+        resultMatrix(i,9) = (G_resting_lengths(1)+resultMatrix(i,5))/G_resting_lengths(1);
+    end
+end
+
 %% Section 5: Testing
 clc
 
