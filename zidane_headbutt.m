@@ -38,7 +38,7 @@ counter = 1;
 
 BF_results = zeros(numAngles, 6);
 RF_results = zeros(numAngles, 6);
-G_results = zeros(numAngles, 4);
+G_results = zeros(numAngles, 6);
 
 
 for k = 1:numAngles % BF
