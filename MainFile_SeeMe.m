@@ -127,15 +127,15 @@ resultMatrix = [resultMatrix newColumn]; % Append on another 2 columns
 for i = 1:length(resultMatrix)
     if resultMatrix(i,2) == 1
         BF_resting_lengths = getRestingLengths(resultMatrix(i,2));
-        resultMatrix(i,9) = (BF_resting_lengths(1)+resultMatrix(i,5))/(BF_resting_lengths(1)+max_BF_change); % Normalized length
+        resultMatrix(i,9) = (BF_resting_lengths(1)+resultMatrix(i,5))/(BF_resting_lengths(1)); % Normalized length
         resultMatrix(i,10) = better_simulate(f0M, BF_resting_lengths(1), BF_resting_lengths(2), resultMatrix(i,6), resultMatrix(i,9)); % Velocity
     elseif resultMatrix(i,2) == 2
         RF_resting_lengths = getRestingLengths(resultMatrix(i,2));
-        resultMatrix(i,9) = (RF_resting_lengths(1)+resultMatrix(i,5))/(RF_resting_lengths(1)+max_RF_change); % Normalized length
+        resultMatrix(i,9) = (RF_resting_lengths(1)+resultMatrix(i,5))/(RF_resting_lengths(1)); % Normalized length
         resultMatrix(i,10) = better_simulate(f0M, RF_resting_lengths(1), RF_resting_lengths(2), resultMatrix(i,6), resultMatrix(i,9)); % Velocity
     elseif resultMatrix(i,2) == 3
         G_resting_lengths = getRestingLengths(resultMatrix(i,2));
-        resultMatrix(i,9) = (G_resting_lengths(1)+resultMatrix(i,5))/(G_resting_lengths(1)+max_G_change); % Normalized length
+        resultMatrix(i,9) = (G_resting_lengths(1)+resultMatrix(i,5))/(G_resting_lengths(1)); % Normalized length
         resultMatrix(i,10) = better_simulate(f0M, G_resting_lengths(1), G_resting_lengths(2), resultMatrix(i,6), resultMatrix(i,9));
     else
         error('Not a valid muscle input');
