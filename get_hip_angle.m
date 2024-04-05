@@ -35,7 +35,5 @@ function [found_angle] = get_hip_angle(crankAngle)
     
     regression_eqn = polyfit(crank_angles, hip_angles, 4); % fit a fourth order polynomial to the data
     
-    found_angle = regression_eqn(1)*(crankAngle)^4 + regression_eqn(2)*(crankAngle)^3 + 
-    regression_eqn(3)*(crankAngle)^2 + regression_eqn(4)*(crankAngle) + 
-    regression_eqn(5); % Find max_velocity from regression equation
+    found_angle = regression_eqn(1)*(crankAngle)^4 + regression_eqn(2)*(crankAngle)^3 + regression_eqn(3)*(crankAngle)^2 + regression_eqn(4)*(crankAngle) + regression_eqn(5); % Find max_velocity from regression equation
     end
