@@ -11,9 +11,12 @@ for i = 1:360
 end
 
 numAngles = length(crank_angles_matrix);
-hipAngles = zeros(numAngles, 1);
-kneeAngles = zeros(numAngles, 1);
+hipAngles = zeros(numAngles, 2);
+kneeAngles = zeros(numAngles, 2);
+
+test = get_hip_angle(13.885);
 
 for i = 1:numAngles
-    [hipAngles(i), kneeAngles(i)] = selectJointAngles(crankAngleMatrix(i));
+    hipAngles(i,1) = crank_angles_matrix(i,1);
+    hipAngles(i,2) = get_hip_angle(crank_angles_matrix(i,2));
 end
