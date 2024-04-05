@@ -36,6 +36,23 @@ numJoints = length(jointMatrix);
 resultMatrix = zeros(numAngles * ((numMuscles * numJoints)-1), 5);
 counter = 1;
 
+BF_results = zeros(numAngles, 6);
+RF_results = zeros(numAngles, 6);
+G_results = zeros(numAngles, 4);
+
+
+for k = 1:numAngles
+    muscle = muscleMatrix{1};
+    hip_joint = jointMatrix{1};
+    knee_joint = jointMatrix{2};
+    BF_results(k,1) = crank_angles_matrix(k,1);
+    BF_results(k,2) = hipAngles(k,2);
+    BF_results(k,3) = kneeAngles(k,2);
+    BF_results(k,4) = get_muscle_length_change(muscle, hip_joint, BF_results(k,2));
+    BF_results(k,5) = get_muscle_length_change(muscle, knee_joint, BF_results(k,2));
+    BF_results(k,6) = BF_results(k,4) + BF_results(k,5);
+end
+
 % Loop for biceps_femoris and rectus_femoris
 for m = 1:numMuscles-1 % Excluding gastrocnemius
     for j = 1:numJoints
@@ -65,3 +82,9 @@ for j = 2:numJoints % Excluding hip
         counter = counter + 1;
     end
 end
+
+% Col 1: Time
+% Col 2: Muscle (1 = bf, 2 = rf, 3 = g)
+% Col 3: Joint (1 = hip, 2 = knee)
+% Col 4: Joint angle
+% Col 5: Change in muscle length
