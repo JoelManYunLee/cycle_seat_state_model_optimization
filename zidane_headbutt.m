@@ -66,7 +66,7 @@ for k = 1:numAngles % RF
 end
 
 for k = 1:numAngles % G
-    muscle = muscleMatrix{2};
+    muscle = muscleMatrix{3};
     knee_joint = jointMatrix{2};
     G_results(k,1) = crank_angles_matrix(k,1);
     G_results(k,2) = 0;
