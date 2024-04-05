@@ -5,6 +5,8 @@ crank_angles_matrix = zeros(360,2);
 % Column 1 = time
 % Column 2 = crank angle
 
+timeStep = 1/540;
+
 for i = 1:360
     crank_angles_matrix(i,1) = i/540; % Time
     crank_angles_matrix(i,2) = time_to_crank_angle(i/540); % Crank angle
@@ -36,9 +38,9 @@ numJoints = length(jointMatrix);
 resultMatrix = zeros(numAngles * ((numMuscles * numJoints)-1), 5);
 counter = 1;
 
-BF_results = zeros(numAngles, 6);
-RF_results = zeros(numAngles, 6);
-G_results = zeros(numAngles, 6);
+BF_results = zeros(numAngles, 7);
+RF_results = zeros(numAngles, 7);
+G_results = zeros(numAngles, 7);
 
 
 for k = 1:numAngles % BF
@@ -51,6 +53,7 @@ for k = 1:numAngles % BF
     BF_results(k,4) = get_muscle_length_change(muscle, hip_joint, BF_results(k,2)); % Column 4 = change in length from hip
     BF_results(k,5) = get_muscle_length_change(muscle, knee_joint, BF_results(k,3)); % Column 5 = change in length from knee
     BF_results(k,6) = BF_results(k,4) + BF_results(k,5); % Column 4 = Net change in length
+    BF_results(k,7) = BF_results(k,6)/timeStep; % Column 7 = approx velocity
 end
 
 for k = 1:numAngles % RF
@@ -63,6 +66,7 @@ for k = 1:numAngles % RF
     RF_results(k,4) = get_muscle_length_change(muscle, hip_joint, RF_results(k,2));
     RF_results(k,5) = get_muscle_length_change(muscle, knee_joint, RF_results(k,3));
     RF_results(k,6) = RF_results(k,4) + RF_results(k,5);
+    RF_results(k,7) = RF_results(k,6)/timeStep; % Column 7 = approx velocity
 end
 
 for k = 1:numAngles % G
@@ -74,6 +78,7 @@ for k = 1:numAngles % G
     G_results(k,4) = 0;
     G_results(k,5) = get_muscle_length_change(muscle, knee_joint, G_results(k,3));
     G_results(k,6) = G_results(k,4) + G_results(k,5);
+    G_results(k,7) = G_results(k,6)/timeStep; % Column 7 = approx velocity
 end
 
 % Loop for biceps_femoris and rectus_femoris
