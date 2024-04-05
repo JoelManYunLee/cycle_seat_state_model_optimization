@@ -19,4 +19,6 @@ test = get_hip_angle(13.885);
 for i = 1:numAngles
     hipAngles(i,1) = crank_angles_matrix(i,1);
     hipAngles(i,2) = get_hip_angle(crank_angles_matrix(i,2));
+    kneeAngles(i,1) = crank_angles_matrix(i,1);
+    kneeAngles(i,2) = get_knee_angle(crank_angles_matrix(i,2));
 end
