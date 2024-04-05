@@ -83,6 +83,9 @@ resultMatrix = [resultMatrix newColumn]; % Append on another 2 columns
 BF_temp = 0; % temp variable to find max change in length
 RF_temp = 0; % temp variable to find max change in length
 G_temp = 0; % temp variable to find max change in length
+max_BF_change = 0;
+max_RF_change = 0;
+max_G_change = 0;
 
 for i = 1:length(resultMatrix)
     resultMatrix(i,7) = get_max_shortening_velocity(resultMatrix(i,6)); % Find Vmax using activation value
