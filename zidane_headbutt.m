@@ -75,3 +75,39 @@ for k = 1:numAngles % G
     G_results(k,5) = get_muscle_length_change(muscle, knee_joint, G_results(k,3));
     G_results(k,6) = G_results(k,4) + G_results(k,5);
 end
+
+% Loop for biceps_femoris and rectus_femoris
+for m = 1:numMuscles-1 % Excluding gastrocnemius
+    for j = 1:numJoints
+        for a = 1:numAngles
+            muscle = muscleMatrix{m};
+            joint = jointMatrix{j};
+            joint_angle = jointAnglesMatrix(a, j + 1); % j+1 to account for crank angle column
+
+            muscle_length_change = get_muscle_length_change(muscle, joint, joint_angle);
+
+            resultMatrix(counter, :) = [jointAnglesMatrix(a, 1), m, j, joint_angle, muscle_length_change];
+            counter = counter + 1;
+        end
+    end
+end
+
+% Loop for gastrocnemius muscle
+for j = 2:numJoints % Excluding hip
+    for a = 1:numAngles
+        muscle = muscleMatrix{end}; % gastrocnemius
+        joint = jointMatrix{j};
+        joint_angle = jointAnglesMatrix(a, j + 1); % j+1 to account for crank angle column
+
+        muscle_length_change = get_muscle_length_change(muscle, joint, joint_angle);
+
+        resultMatrix(counter, :) = [jointAnglesMatrix(a, 1), numMuscles, j, joint_angle, muscle_length_change];
+        counter = counter + 1;
+    end
+end
+
+% Col 1: Crank angle
+% Col 2: Muscle (1 = bf, 2 = rf, 3 = g)
+% Col 3: Joint (1 = hip, 2 = knee)
+% Col 4: Joint angle
+% Col 5: Change in muscle length
