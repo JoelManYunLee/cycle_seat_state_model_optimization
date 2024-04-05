@@ -1,7 +1,7 @@
 clear
 clc
 
-crank_angles_matrix = zeros(360,2)
+crank_angles_matrix = zeros(360,2);
 % Column 1 = time
 % Column 2 = crank angle
 
