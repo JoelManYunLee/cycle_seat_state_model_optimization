@@ -74,16 +74,37 @@ for i = 1:length(resultMatrix) %Loop through and fill in activation values
 end
 
 disp(resultMatrix)
-%% Section 4: Get optimal length (L0) and Vmax
+%% Section 4: Get optimal length (L0) and Vmax and find largest change in length for each muscle
 
 % Column 7 is Vmax
 % Column 8 is L0
 newColumn = zeros(length(resultMatrix),2); % New 2 column for results matrix
 resultMatrix = [resultMatrix newColumn]; % Append on another 2 columns
+BF_temp = 0; % temp variable to find max change in length
+RF_temp = 0; % temp variable to find max change in length
+G_temp = 0; % temp variable to find max change in length
 
 for i = 1:length(resultMatrix)
     resultMatrix(i,7) = get_max_shortening_velocity(resultMatrix(i,6)); % Find Vmax using activation value
     resultMatrix(i,8) = get_optimal_muscle_length(); % NEED THE CSV IN THE FOLDER
+    if resultMatrix(i,2) == 1
+        if resultMatrix(i,5) > BF_temp % Look for greater change in length
+            max_BF_change = resultMatrix(i,5);
+            BF_temp = max_BF_change;
+        end
+    elseif resultMatrix(i,2) == 2
+        if resultMatrix(i,5) > RF_temp % Look for greater change in length
+            max_RF_change = resultMatrix(i,5);
+            RF_temp = max_RF_change;
+        end
+    elseif resultMatrix(i,2) == 3
+        if resultMatrix(i,5) > G_temp % Look for greater change in length
+            max_G_change = resultMatrix(i,5);
+            G_temp = max_G_change;
+        end
+    else
+        error('Not a valid muscle input');
+    end
 end
 
 %% Section: Normalizing lengths (column 9) and adding in velocities (column 10)
