@@ -49,7 +49,7 @@ for k = 1:numAngles
     BF_results(k,2) = hipAngles(k,2);
     BF_results(k,3) = kneeAngles(k,2);
     BF_results(k,4) = get_muscle_length_change(muscle, hip_joint, BF_results(k,2));
-    BF_results(k,5) = get_muscle_length_change(muscle, knee_joint, BF_results(k,2));
+    BF_results(k,5) = get_muscle_length_change(muscle, knee_joint, BF_results(k,3));
     BF_results(k,6) = BF_results(k,4) + BF_results(k,5);
 end
 
