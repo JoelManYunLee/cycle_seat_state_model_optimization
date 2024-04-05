@@ -36,5 +36,5 @@ function [knee_angle] = get_knee_angle(crank_angle)
     
     regression_eqn = polyfit(crank_angles, knee_angles, 5); % fit a second order polynomial to the data
     
-    knee_angle = regression_eqn(1)*(crank_angle)^5 + regression_eqn(2)*(crank_angle)^4+ regression_eqn(3)*(crank_angle)^3 + regression_eqn(4)*(crank_angle)^2 + regression_eqn(5)*alpha + regression_eqn(6); % Find knee angle
+    knee_angle = regression_eqn(1)*(crank_angle)^5 + regression_eqn(2)*(crank_angle)^4+ regression_eqn(3)*(crank_angle)^3 + regression_eqn(4)*(crank_angle)^2 + regression_eqn(5)*crank_angle + regression_eqn(6); % Find knee angle
     end
