@@ -91,6 +91,9 @@ for k = 1:numAngles
     RF_results(k,7) = RF_results(k,6)/timeStep; % Column 7 = approx velocity
 end
 
+RF_results(360,7) = RF_results(359,7);
+RF_results(1,7) = RF_results(2,7);
+
 for k = 1:numAngles % Gastrocnemius
     muscle = muscleMatrix{3};
     knee_joint = jointMatrix{2};
