@@ -42,7 +42,7 @@ BF_results = zeros(numAngles, 7);
 RF_results = zeros(numAngles, 7);
 G_results = zeros(numAngles, 7);
 
-
+%%%%%%% PLEASE FIX THE CHANGE IN LENGTH SHENANIGANS
 for k = 1:numAngles % BF
     muscle = muscleMatrix{1};
     hip_joint = jointMatrix{1};
@@ -91,10 +91,7 @@ for k = 1:numAngles
     RF_results(k,7) = RF_results(k,6)/timeStep; % Column 7 = approx velocity
 end
 
-RF_results(360,7) = RF_results(359,7);
-RF_results(1,7) = RF_results(2,7);
-
-for k = 1:numAngles % G
+for k = 1:numAngles % Gastrocnemius
     muscle = muscleMatrix{3};
     knee_joint = jointMatrix{2};
     G_results(k,1) = crank_angles_matrix(k,1);
