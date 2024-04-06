@@ -42,7 +42,11 @@ BF_results = zeros(numAngles, 7);
 RF_results = zeros(numAngles, 7);
 G_results = zeros(numAngles, 7);
 
+<<<<<<< HEAD
 %%%%%%% PLEASE FIX THE CHANGE IN LENGTH SHENANIGANS
+=======
+
+>>>>>>> debfeffbec870479a94f7967a072e78a2d1103ab
 for k = 1:numAngles % BF
     muscle = muscleMatrix{1};
     hip_joint = jointMatrix{1};
@@ -52,10 +56,27 @@ for k = 1:numAngles % BF
     BF_results(k,3) = kneeAngles(k,2); % Column 3 = knee angle
     BF_results(k,4) = get_muscle_length_change(muscle, hip_joint, BF_results(k,2)); % Column 4 = change in length from hip
     BF_results(k,5) = get_muscle_length_change(muscle, knee_joint, BF_results(k,3)); % Column 5 = change in length from knee
+<<<<<<< HEAD
     BF_results(k,6) = BF_results(k,4) + BF_results(k,5); % Column 6 = Net change in length
     BF_results(k,7) = BF_results(k,6)/timeStep; % Column 7 = approx velocity
 end
 
+=======
+    BF_results(k,6) = (BF_results(k,4) + BF_results(k,5))/1000; % Column 6 = Net change in length, divided by 1000 to be in m
+    BF_results(k,7) = BF_results(k,6)/timeStep; % Column 7 = approx velocity
+end
+
+tempBFLength = BF_results(:,6);
+%for k = 1:numAngles
+    if k > 1
+        BF_results(k,6) = tempBFLength(k,6) - tempBFLength(k-1,6);
+        BF_results(k,6) = BF_results(k,6) - currentBFValue;
+        BF_results(k-1,6) = BF_results(k-1,6) - tempBFValue;
+    else
+        
+end
+
+>>>>>>> debfeffbec870479a94f7967a072e78a2d1103ab
 for k = 1:numAngles % RF
     muscle = muscleMatrix{2};
     hip_joint = jointMatrix{1};
@@ -69,7 +90,11 @@ for k = 1:numAngles % RF
     RF_results(k,7) = RF_results(k,6)/timeStep; % Column 7 = approx velocity
 end
 
+<<<<<<< HEAD
 for k = 1:numAngles % Gastrocnemius
+=======
+for k = 1:numAngles % G
+>>>>>>> debfeffbec870479a94f7967a072e78a2d1103ab
     muscle = muscleMatrix{3};
     knee_joint = jointMatrix{2};
     G_results(k,1) = crank_angles_matrix(k,1);
