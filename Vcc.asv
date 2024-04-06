@@ -184,4 +184,5 @@ function [found_alpha_BF] = Vcc(crankAngle)
     regression_eqn = polyfit(crank_angles, alpha_BF, 10);
 
     found_alpha_BF = regression_eqn(1)*(crankAngle)^10 + regression_eqn(2)*(crankAngle)^9 + regression_eqn(3)*(crankAngle)^8 + regression_eqn(4)*(crankAngle)^7 + regression_eqn(5)*(crankAngle)^6 + regression_eqn(6)*(crankAngle)^5 + regression_eqn(7)*(crankAngle)^4 + regression_eqn(8)*(crankAngle)^3 + regression_eqn(9)*(crankAngle)^2 + regression_eqn(10)*(crankAngle)^1 + regression_eqn(11);
+
 end
