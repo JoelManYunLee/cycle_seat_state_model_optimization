@@ -5,11 +5,11 @@ crank_angles_matrix = zeros(360,2);
 % Column 1 = time
 % Column 2 = crank angle
 
-timeStep = 1/540;
+timeStep = 1/540; % Time step chosen to correspond to 1 degree rotations
 
 for i = 1:360
-    crank_angles_matrix(i,1) = i/540; % Time
-    crank_angles_matrix(i,2) = time_to_crank_angle(i/540); % Crank angle
+    crank_angles_matrix(i,1) = i/540; % Fill in times
+    crank_angles_matrix(i,2) = time_to_crank_angle(i/540); % Fill in crrank angles
 end
 
 numAngles = length(crank_angles_matrix);
@@ -17,9 +17,7 @@ hipAngles = zeros(numAngles, 2);
 kneeAngles = zeros(numAngles, 2);
 jointAnglesMatrix = zeros(numAngles,3);
 
-test = get_hip_angle(13.885);
-
-for i = 1:numAngles
+for i = 1:numAngles % Loop through and add hip and knee angles to individual matrices and one combined matrix
     hipAngles(i,1) = crank_angles_matrix(i,1);
     hipAngles(i,2) = get_hip_angle(crank_angles_matrix(i,2));
     kneeAngles(i,1) = crank_angles_matrix(i,1);
@@ -42,8 +40,8 @@ BF_results = zeros(numAngles, 7);
 RF_results = zeros(numAngles, 7);
 G_results = zeros(numAngles, 7);
 
-%%%%%%% PLEASE FIX THE CHANGE IN LENGTH SHENANIGANS
-for k = 1:numAngles % BF
+
+for k = 1:numAngles % Loop through and fill in BF results
     muscle = muscleMatrix{1};
     hip_joint = jointMatrix{1};
     knee_joint = jointMatrix{2};
@@ -55,85 +53,92 @@ for k = 1:numAngles % BF
     BF_results(k,6) = (BF_results(k,4) + BF_results(k,5))/1000; % Column 6 = Net change in length, divided by 1000 to be in m
 end
 
-tempBFLength = BF_results(:,6);
+tempBFLength = BF_results(:,6); % Temporary matrix to help adjust the changes in length
 for k = 1:numAngles
     if k > 1
-        BF_results(k,6) = tempBFLength(k) - tempBFLength(k-1);
+        BF_results(k,6) = tempBFLength(k) - tempBFLength(k-1); % Change in length should be relative to previous state, not the initial position
     else
-        BF_results(k,6) = 0;
+        BF_results(k,6) = 0; % Assuming first state has no change in length
     end
     BF_results(k,7) = BF_results(k,6)/timeStep; % Column 7 = approx velocity
 end
 
 crank_angles_matrix(360,2) = 360;
-BF_results(360,7) = BF_results(359,7);
+% Don't want the first and last result of matrix because the loop causes discontinuties in our graphs
+BF_results(360,7) = BF_results(359,7); 
 BF_results(1,7) = BF_results(2,7);
 
-for k = 1:numAngles % RF
+for k = 1:numAngles % Loop through and fill in RF results
     muscle = muscleMatrix{2};
     hip_joint = jointMatrix{1};
     knee_joint = jointMatrix{2};
-    RF_results(k,1) = crank_angles_matrix(k,1);
-    RF_results(k,2) = hipAngles(k,2);
-    RF_results(k,3) = kneeAngles(k,2);
-    RF_results(k,4) = get_muscle_length_change(muscle, hip_joint, RF_results(k,2));
-    RF_results(k,5) = get_muscle_length_change(muscle, knee_joint, RF_results(k,3));
-    RF_results(k,6) = (RF_results(k,4) + RF_results(k,5))/1000;
+    RF_results(k,1) = crank_angles_matrix(k,1); % Column 1 = time
+    RF_results(k,2) = hipAngles(k,2); % Column 2 = hip angle
+    RF_results(k,3) = kneeAngles(k,2); % Column 3 = knee angle
+    RF_results(k,4) = get_muscle_length_change(muscle, hip_joint, RF_results(k,2)); % Column 4 = change in length from hip
+    RF_results(k,5) = get_muscle_length_change(muscle, knee_joint, RF_results(k,3)); % Column 5 = change in length from knee
+    RF_results(k,6) = (RF_results(k,4) + RF_results(k,5))/1000; % Column 6 = Net change in length, divided by 1000 to be in m
 end
 
-tempRFLength = RF_results(:,6);
+tempRFLength = RF_results(:,6); % Temporary matrix to help adjust the changes in length
 for k = 1:numAngles
     if k > 1
-        RF_results(k,6) = tempRFLength(k) - tempRFLength(k-1);
+        RF_results(k,6) = tempRFLength(k) - tempRFLength(k-1); % Change in length should be relative to previous state, not the initial position
     else
-        RF_results(k,6) = 0;
+        RF_results(k,6) = 0; % Assuming first state has no change in length
     end
     RF_results(k,7) = RF_results(k,6)/timeStep; % Column 7 = approx velocity
 end
 
+% Don't want the first and last result of matrix because the loop causes discontinuties in our graphs
 RF_results(360,7) = RF_results(359,7);
 RF_results(1,7) = RF_results(2,7);
 
-for k = 1:numAngles % Gastrocnemius
+for k = 1:numAngles % Gastrocnemius results matrix
     muscle = muscleMatrix{3};
     knee_joint = jointMatrix{2};
-    G_results(k,1) = crank_angles_matrix(k,1);
-    G_results(k,2) = 0;
-    G_results(k,3) = kneeAngles(k,2);
-    G_results(k,4) = 0;
-    G_results(k,5) = get_muscle_length_change(muscle, knee_joint, G_results(k,3));
-    G_results(k,6) = (G_results(k,4) + G_results(k,5))/1000;
+    G_results(k,1) = crank_angles_matrix(k,1); % Column 1 = time
+    G_results(k,2) = 0; % Column 2 = hip angle (0 because gastrocnemius length with hip angle)
+    G_results(k,3) = kneeAngles(k,2); % Column 3 = knee angles
+    G_results(k,4) = 0; % Column 4 = change in length from hip (0 for calf)
+    G_results(k,5) = get_muscle_length_change(muscle, knee_joint, G_results(k,3)); % Column 5 = change in length from knee
+    G_results(k,6) = (G_results(k,4) + G_results(k,5))/1000; % Column 6 = Net change in length, divided by 1000 to be in m
 end
 
-tempGLength = G_results(:,6);
+tempGLength = G_results(:,6); % Temp matrix to help adjust the changes in length
 for k = 1:numAngles
     if k > 1
-        G_results(k,6) = tempGLength(k) - tempGLength(k-1);
+        G_results(k,6) = tempGLength(k) - tempGLength(k-1);% Change in length should be relative to previous state
     else
-        G_results(k,6) = 0;
+        G_results(k,6) = 0; % First state has no change in length
     end
     G_results(k,7) = G_results(k,6)/timeStep; % Column 7 = approx velocity
 end
 
+% Don't want the first and last result of matrix because the loop causes discontinuties in our graphs
 G_results(360,7) = G_results(359,7);
 G_results(1,7) = G_results(2,7);
 
-figure
+figure % Plot the muscle velocities versus the crank angle
 hold on
 plot(crank_angles_matrix(:,2), BF_results(:,7))
 plot(crank_angles_matrix(:,2), RF_results(:,7))
 plot(crank_angles_matrix(:,2), G_results(:,7))
 hold off
 title('Plots of muscle velocities versus crank angles')
+xlabel('Crank Angle (degrees)')
+ylabel('Muscle Velocity (m/s)')
 legend('BF','RF','G')
 
-figure
+figure % Plot results from ode45 (consumed energy vs time)
 hold on
 simulate_DE_BF()
 simulate_DE_RF()
 simulate_DE_G()
 hold off
-title('Plots of muscle energies versus crank angles')
+title('Plots of muscle energies versus time')
+xlabel('Time (s)')
+ylabel('Consumed Metabolic Energy (calorie)')
 legend('BF','RF','G')
 
 % Loop for biceps_femoris and rectus_femoris
