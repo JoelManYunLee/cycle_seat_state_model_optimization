@@ -4,7 +4,7 @@ function simulate_DE_BF()
     E0 = 0;  % Initial value of E
 
     % Time span for simulation
-    tspan = [0 0.667]; % Modify the time span as needed
+    tspan = [0 0.666667]; % Modify the time span as needed
 
     % Solve the differential equation
     [t, E] = ode45(@dEdt, tspan, E0);
