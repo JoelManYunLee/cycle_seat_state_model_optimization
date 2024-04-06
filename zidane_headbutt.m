@@ -127,6 +127,8 @@ hold off
 title('Plots of muscle velocities versus crank angles')
 legend('BF','RF','G')
 
+simulate_DE()
+
 % Loop for biceps_femoris and rectus_femoris
 for m = 1:numMuscles-1 % Excluding gastrocnemius
     for j = 1:numJoints
