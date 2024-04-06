@@ -19,7 +19,7 @@ function simulate_DE_G()
     function dEdt = dEdt(t, E)
         % Parameters
         Fo = 1;         % Some constant value for Fo
-        Lo = 1;         % Some constant value for Lo
+        Lo = get_optimal_muscle_length()*0.241; % Normalize length that corresponds to peak force * resting length
         alpha = get_activation_values_G(time_to_crank_angle(t)); % Value of alpha at current crank angle
         Vmax = get_max_shortening_velocity(alpha); % Value of vmax at current alpha
 
