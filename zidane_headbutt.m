@@ -42,7 +42,7 @@ BF_results = zeros(numAngles, 7);
 RF_results = zeros(numAngles, 7);
 G_results = zeros(numAngles, 7);
 
-
+%%%%%%% PLEASE FIX THE CHANGE IN LENGTH SHENANIGANS
 for k = 1:numAngles % BF
     muscle = muscleMatrix{1};
     hip_joint = jointMatrix{1};
