@@ -362,10 +362,10 @@ function [velo] = get_BF_velocity(crankAngle)
         358	0.026514279
         359	0.0251497
         360	0.0251497];
-        
+
     crank_angles = data(:,1); % crank angles data
     BF_velocity = data(:,2); % bf velocity data
 
-    regression_eqn = polyfit(crank_angles, BF_velcoity, 4); % fit a fourth order polynomial to the data
+    regression_eqn = polyfit(crank_angles, BF_velocity, 4); % fit a fourth order polynomial to the data
     velo = regression_eqn(1)*(crankAngle)^4 + regression_eqn(2)*(crankAngle)^3+ regression_eqn(3)*(crankAngle)^2 + regression_eqn(4)*(crankAngle) + regression_eqn(5); % Find BF_velocity
 end
