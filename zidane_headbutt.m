@@ -52,9 +52,6 @@ for k = 1:numAngles % BF
     BF_results(k,3) = kneeAngles(k,2); % Column 3 = knee angle
     BF_results(k,4) = get_muscle_length_change(muscle, hip_joint, BF_results(k,2)); % Column 4 = change in length from hip
     BF_results(k,5) = get_muscle_length_change(muscle, knee_joint, BF_results(k,3)); % Column 5 = change in length from knee
-<<<<<<< HEAD
-    BF_results(k,6) = BF_results(k,4) + BF_results(k,5); % Column 6 = Net change in length
-=======
     BF_results(k,6) = (BF_results(k,4) + BF_results(k,5))/1000; % Column 6 = Net change in length, divided by 1000 to be in m
 end
 
@@ -65,7 +62,6 @@ for k = 1:numAngles
     else
         BF_results(k,6) = 0;
     end
->>>>>>> debfeffbec870479a94f7967a072e78a2d1103ab
     BF_results(k,7) = BF_results(k,6)/timeStep; % Column 7 = approx velocity
 end
 
