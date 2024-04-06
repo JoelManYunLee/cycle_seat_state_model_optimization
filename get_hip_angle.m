@@ -4,6 +4,7 @@ function [found_angle] = get_hip_angle(crankAngle)
     % data(:,1): samples of an independent variable
     % data(:,2): corresponding samples of a dependent variable
     
+    %%% Data is from M. O, Ericson, R. Nisell, G. Nemeth, “Joint Motions of the Lower-Limb during Ergometer Cycling,” Journal of Orthopaedic and Sports Physical Therapy, vol. 9, no.8, pp.273-278, 1998. doi:10.2519/jospt.1988.9.8.273.
     data = [-0.5677651411026403, 70.05889177239075
         13.8850864972907, 70.69127945171014
         29.199649631227558, 69.46042277210655

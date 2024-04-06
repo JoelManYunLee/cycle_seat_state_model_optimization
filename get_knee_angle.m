@@ -4,6 +4,7 @@ function [knee_angle] = get_knee_angle(crank_angle)
     % data(:,1): samples of an independent variable
     % data(:,2): corresponding samples of a dependent variable
     
+    %%% Data is from M. O, Ericson, R. Nisell, G. Nemeth, “Joint Motions of the Lower-Limb during Ergometer Cycling,” Journal of Orthopaedic and Sports Physical Therapy, vol. 9, no.8, pp.273-278, 1998. doi:10.2519/jospt.1988.9.8.273.
     data = [-1.8929254302103402, 109.10216718266253
         13.078393881453152, 106.37770897832817
         28.04971319311663, 100.68111455108358
