@@ -192,6 +192,43 @@ for i = 1:numAngles
     BF_tendon_data(i,6) = (BF_tendon_data(i,5) - 0.092)/0.092; % Col 6: Tendon strain
 end
 
-figure
+RF_muscle = HillTypeMuscle(100, 0.3497, 0.0517); % Call hill type class for RF muscle
+RF_total_lm_lt_length = 0.3497+0.0517; 
+RF_tendon_data = zeros(numAngles, 6); % Matrix used to compute strain in tendon
+RF_tendon_data(1,2) = 0.3497; % Resting length of muscle
+for i = 1:numAngles
+    RF_tendon_data(i,1) = RF_results(i,6); % Col 1: Change in muscle length
+    if i > 1
+        RF_tendon_data(i,2) = RF_tendon_data(i-1,2) + RF_tendon_data(i,1); % Col 2: current muscle length
+    end
+    RF_tendon_data(i,3) = RF_tendon_data(i,2)/0.3497; % Col 3: normalized muscle length
+    RF_tendon_data(i,4) = RF_muscle.norm_tendon_length(RF_total_lm_lt_length, RF_tendon_data(i,3)); % Col 4: normalized tendon length
+    RF_tendon_data(i,5) = RF_tendon_data(i,4)*0.0517; % Col 5: actual tendon length
+    RF_tendon_data(i,6) = (RF_tendon_data(i,5) - 0.0517)/0.0517; % Col 6: Tendon strain
+end
+
+G_muscle = HillTypeMuscle(100, 0.241, 0.212); % Call hill type class for Gas muscle
+G_total_lm_lt_length = 0.241+0.212; 
+G_tendon_data = zeros(numAngles, 6); % Matrix used to compute strain in tendon
+G_tendon_data(1,2) = 0.241; % Resting length of muscle
+for i = 1:numAngles
+    G_tendon_data(i,1) = G_results(i,6); % Col 1: Change in muscle length
+    if i > 1
+        G_tendon_data(i,2) = G_tendon_data(i-1,2) + G_tendon_data(i,1); % Col 2: current muscle length
+    end
+    G_tendon_data(i,3) = G_tendon_data(i,2)/0.241; % Col 3: normalized muscle length
+    G_tendon_data(i,4) = G_muscle.norm_tendon_length(G_total_lm_lt_length, G_tendon_data(i,3)); % Col 4: normalized tendon length
+    G_tendon_data(i,5) = G_tendon_data(i,4)*0.212; % Col 5: actual tendon length
+    G_tendon_data(i,6) = (G_tendon_data(i,5) - 0.212)/0.212; % Col 6: Tendon strain
+end
+
+figure % Plotting tendon strains
+hold on
 plot(crank_angles_matrix(:,2), BF_tendon_data(:,6));
-title('BF Tendon Strain Graph')
+plot(crank_angles_matrix(:,2), RF_tendon_data(:,6));
+plot(crank_angles_matrix(:,2), G_tendon_data(:,6));
+hold off
+title('Distal Tendon Strain Graph')
+xlabel('Crank Angles (degrees)')
+ylabel('Strain (m/m)')
+legend('BF', 'RF', 'G')
