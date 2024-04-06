@@ -176,3 +176,22 @@ end
 % Col 3: Joint (1 = hip, 2 = knee)
 % Col 4: Joint angle
 % Col 5: Change in muscle length
+
+BF_muscle = HillTypeMuscle(100, 0.316, 0.092); % Call hill type class for BF muscle
+BF_total_lm_lt_length = 0.316+0.092; 
+BF_tendon_data = zeros(numAngles, 6); % Matrix used to compute strain in tendon
+BF_tendon_data(1,2) = 0.316; % Resting length of muscle
+for i = 1:numAngles
+    BF_tendon_data(i,1) = BF_results(i,6); % Col 1: Change in muscle length
+    if i > 1
+        BF_tendon_data(i,2) = BF_tendon_data(i-1,2) + BF_tendon_data(i,1); % Col 2: current muscle length
+    end
+    BF_tendon_data(i,3) = BF_tendon_data(i,2)/0.316; % Col 3: normalized muscle length
+    BF_tendon_data(i,4) = BF_muscle.norm_tendon_length(BF_total_lm_lt_length, BF_tendon_data(i,3)); % Col 4: normalized tendon length
+    BF_tendon_data(i,5) = BF_tendon_data(i,4)*0.092; % Col 5: actual tendon length
+    BF_tendon_data(i,6) = (BF_tendon_data(i,5) - 0.092)/0.092; % Col 6: Tendon strain
+end
+
+figure
+plot(crank_angles_matrix(:,2), BF_tendon_data(:,6));
+title('BF Tendon Strain Graph')
