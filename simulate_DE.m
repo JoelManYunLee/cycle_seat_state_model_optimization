@@ -1,7 +1,7 @@
 function simulate_DE()
 
     % Initial condition
-    E0 = 0;  % Initial value of E
+    E0 = 1;  % Initial value of E
 
     % Time span for simulation
     tspan = [0 0.667]; % Modify the time span as needed
