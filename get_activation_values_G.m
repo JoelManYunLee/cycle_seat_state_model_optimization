@@ -4,6 +4,7 @@ function [found_alpha_RF] = get_activation_values_RF(crankAngle)
     %data(:,1): crank angle
     %data(:,2): alpha of RF
 
+    %%% Data is from D.M. Rouffet & C. A. Hautier, “EMG normalization to study muscle activation in cycling," Journal of Electromyography and Kinesiology, vol. 18, no.8, pp.866-878, 2008. doi:10.1016/j.jelekin.2007.03.008
     data = [ 1.56175897	0.7967
         4.14802743	0.7859
         7.204526519	0.7751

@@ -4,6 +4,7 @@ function [found_alpha_BF] = get_activation_values_BF(crankAngle)
     %data(:,1): crank angle
     %data(:,2): alpha of BF
 
+    %%% Data is from D.M. Rouffet & C. A. Hautier, “EMG normalization to study muscle activation in cycling," Journal of Electromyography and Kinesiology, vol. 18, no.8, pp.866-878, 2008. doi:10.1016/j.jelekin.2007.03.008 
     data = [0.678431265,	0.067
         2.792765595,	0.082
         4.907099926,	0.096
