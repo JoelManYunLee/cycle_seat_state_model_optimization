@@ -1,10 +1,10 @@
-function simulate_DE_BF(AbsTol, RelTol)
+function simulate_DE_BF(AbsTol, RelTol, T)
 
     % Initial condition
     E0 = 0;  % Initial value of E
 
     % Time span for simulation
-    tspan = [0 0.666667]; 
+    tspan = [0 T]; 
 
     % Testing for numerical error
     options = odeset ('RelTol', RelTol, 'AbsTol', AbsTol);
@@ -13,10 +13,7 @@ function simulate_DE_BF(AbsTol, RelTol)
     [t, E] = ode45(@dEdt, tspan, E0, options);
 
     % Plot the results
-    plot(t, E);
-    xlabel('Time');
-    ylabel('E');
-    title('Simulation of Differential Equation');
+    plot(t, E, LineWidth=2);
 
     % Define the differential equation
     function dEdt = dEdt(t, E)
