@@ -183,45 +183,38 @@ BF_muscle = HillTypeMuscle(100, 0.316, 0.092); % Call hill type class for BF mus
 BF_total_lm_lt_length = 0.316+0.092; 
 BF_tendon_data = zeros(numAngles, 6); % Matrix used to compute strain in tendon
 BF_tendon_data(1,2) = 0.316; % Resting length of muscle
-for i = 1:numAngles
-    BF_tendon_data(i,1) = BF_results(i,6); % Col 1: Change in muscle length
-    if i > 1
-        BF_tendon_data(i,2) = BF_tendon_data(i-1,2) + BF_tendon_data(i,1); % Col 2: current muscle length
-    end
-    BF_tendon_data(i,3) = BF_tendon_data(i,2)/0.316; % Col 3: normalized muscle length
-    BF_tendon_data(i,4) = BF_muscle.norm_tendon_length(BF_total_lm_lt_length, BF_tendon_data(i,3)); % Col 4: normalized tendon length
-    BF_tendon_data(i,5) = BF_tendon_data(i,4)*0.092; % Col 5: actual tendon length
-    BF_tendon_data(i,6) = (BF_tendon_data(i,5) - 0.092)/0.092; % Col 6: Tendon strain
-end
 
 RF_muscle = HillTypeMuscle(100, 0.3497, 0.0517); % Call hill type class for RF muscle
 RF_total_lm_lt_length = 0.3497+0.0517; 
 RF_tendon_data = zeros(numAngles, 6); % Matrix used to compute strain in tendon
 RF_tendon_data(1,2) = 0.3497; % Resting length of muscle
-for i = 1:numAngles
-    RF_tendon_data(i,1) = RF_results(i,6); % Col 1: Change in muscle length
-    if i > 1
-        RF_tendon_data(i,2) = RF_tendon_data(i-1,2) + RF_tendon_data(i,1); % Col 2: current muscle length
-    end
-    RF_tendon_data(i,3) = RF_tendon_data(i,2)/0.3497; % Col 3: normalized muscle length
-    RF_tendon_data(i,4) = RF_muscle.norm_tendon_length(RF_total_lm_lt_length, RF_tendon_data(i,3)); % Col 4: normalized tendon length
-    RF_tendon_data(i,5) = RF_tendon_data(i,4)*0.0517; % Col 5: actual tendon length
-    RF_tendon_data(i,6) = (RF_tendon_data(i,5) - 0.0517)/0.0517; % Col 6: Tendon strain
-end
 
 G_muscle = HillTypeMuscle(100, 0.241, 0.212); % Call hill type class for Gas muscle
 G_total_lm_lt_length = 0.241+0.212; 
 G_tendon_data = zeros(numAngles, 6); % Matrix used to compute strain in tendon
 G_tendon_data(1,2) = 0.241; % Resting length of muscle
+
 for i = 1:numAngles
-    G_tendon_data(i,1) = G_results(i,6); % Col 1: Change in muscle length
+    BF_tendon_data(i,1) = BF_results(i,6); % Col 1: Change in muscle length
+    RF_tendon_data(i,1) = RF_results(i,6); 
+    G_tendon_data(i,1) = G_results(i,6); 
     if i > 1
-        G_tendon_data(i,2) = G_tendon_data(i-1,2) + G_tendon_data(i,1); % Col 2: current muscle length
+        BF_tendon_data(i,2) = BF_tendon_data(i-1,2) + BF_tendon_data(i,1); % Col 2: current muscle length
+        RF_tendon_data(i,2) = RF_tendon_data(i-1,2) + RF_tendon_data(i,1); 
+        G_tendon_data(i,2) = G_tendon_data(i-1,2) + G_tendon_data(i,1); 
     end
-    G_tendon_data(i,3) = G_tendon_data(i,2)/0.241; % Col 3: normalized muscle length
-    G_tendon_data(i,4) = G_muscle.norm_tendon_length(G_total_lm_lt_length, G_tendon_data(i,3)); % Col 4: normalized tendon length
-    G_tendon_data(i,5) = G_tendon_data(i,4)*0.212; % Col 5: actual tendon length
-    G_tendon_data(i,6) = (G_tendon_data(i,5) - 0.212)/0.212; % Col 6: Tendon strain
+    BF_tendon_data(i,3) = BF_tendon_data(i,2)/0.316; % Col 3: normalized muscle length
+    RF_tendon_data(i,3) = RF_tendon_data(i,2)/0.3497;
+    G_tendon_data(i,3) = G_tendon_data(i,2)/0.241; 
+    BF_tendon_data(i,4) = BF_muscle.norm_tendon_length(BF_total_lm_lt_length, BF_tendon_data(i,3)); % Col 4: normalized tendon length
+    RF_tendon_data(i,4) = RF_muscle.norm_tendon_length(RF_total_lm_lt_length, RF_tendon_data(i,3)); 
+    G_tendon_data(i,4) = G_muscle.norm_tendon_length(G_total_lm_lt_length, G_tendon_data(i,3)); 
+    BF_tendon_data(i,5) = BF_tendon_data(i,4)*0.092; % Col 5: actual tendon length
+    RF_tendon_data(i,5) = RF_tendon_data(i,4)*0.0517;
+    G_tendon_data(i,5) = G_tendon_data(i,4)*0.212;
+    BF_tendon_data(i,6) = (BF_tendon_data(i,5) - 0.092)/0.092; % Col 6: Tendon strain
+    RF_tendon_data(i,6) = (RF_tendon_data(i,5) - 0.0517)/0.0517; 
+    G_tendon_data(i,6) = (G_tendon_data(i,5) - 0.212)/0.212; 
 end
 
 figure % Plotting tendon strains
