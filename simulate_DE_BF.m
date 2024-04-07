@@ -1,13 +1,16 @@
-function simulate_DE_BF()
+function simulate_DE_BF(AbsTol, RelTol)
 
     % Initial condition
     E0 = 0;  % Initial value of E
 
     % Time span for simulation
-    tspan = [0 0.666667]; % Modify the time span as needed
+    tspan = [0 0.666667]; 
+
+    % Testing for numerical error
+    options = odeset ('RelTol', RelTol, 'AbsTol', AbsTol);
 
     % Solve the differential equation
-    [t, E] = ode45(@dEdt, tspan, E0);
+    [t, E] = ode45(@dEdt, tspan, E0, options);
 
     % Plot the results
     plot(t, E);

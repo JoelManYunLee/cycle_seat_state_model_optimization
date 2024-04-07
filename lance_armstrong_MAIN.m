@@ -132,16 +132,30 @@ xlabel('Crank Angle (degrees)')
 ylabel('Muscle Velocity (m/s)')
 legend('BF','RF','G')
 
+AbsTol = 1e-8;
+RelTol = 1e-6;
 figure % Plot results from ode45 (consumed energy vs time)
 hold on
-simulate_DE_BF()
-simulate_DE_RF()
-simulate_DE_G()
+simulate_DE_BF(AbsTol,RelTol)
+simulate_DE_RF(AbsTol,RelTol)
+simulate_DE_G(AbsTol,RelTol)
 hold off
 title('Plots of muscle energies versus time')
 xlabel('Time (s)')
 ylabel('Consumed Metabolic Energy (calorie)')
 legend('BF','RF','G')
+
+%%% Numerical Error Testing
+%figure
+%hold on
+%simulate_DE_BF(1e-8,1e-11)
+%simulate_DE_BF(1e-8,1e-8)
+%simulate_DE_BF(1e-8,1e-5)
+%simulate_DE_BF(1e-8,1e-2)
+%title('Plots of muscle energies versus time')
+%xlabel('Time (s)')
+%ylabel('Consumed Metabolic Energy (calorie)')
+%legend('RelTol = 1e-11', 'RelTol = 1e-8', 'RelTol = 1e-5', 'RelTol = 1e-2')
 
 BF_muscle = HillTypeMuscle(100, 0.316, 0.092); % Call hill type class for BF muscle
 BF_total_lm_lt_length = 0.316+0.092; 
