@@ -1,19 +1,19 @@
-function simulate_DE_G()
+function simulate_DE_G(AbsTol,RelTol,T)
 
     % Initial condition
     E0 = 0;  % Initial value of E
 
     % Time span for simulation
-    tspan = [0 0.666667]; % Modify the time span as needed
+    tspan = [0 T]; 
+
+    % Testing for numerical error
+    options = odeset ('RelTol', RelTol, 'AbsTol', AbsTol);
 
     % Solve the differential equation
-    [t, E] = ode45(@dEdt, tspan, E0);
+    [t, E] = ode45(@dEdt, tspan, E0, options);
 
     % Plot the results
-    plot(t, E);
-    xlabel('Time');
-    ylabel('E');
-    title('Simulation of Differential Equation');
+    plot(t, E, LineWidth=2);
 
     % Define the differential equation
     function dEdt = dEdt(t, E)

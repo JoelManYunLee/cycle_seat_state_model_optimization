@@ -123,25 +123,40 @@ G_results(1,7) = G_results(2,7);
 
 figure % Plot the muscle velocities versus the crank angle
 hold on
-plot(crank_angles_matrix(:,2), BF_results(:,7))
-plot(crank_angles_matrix(:,2), RF_results(:,7))
-plot(crank_angles_matrix(:,2), G_results(:,7))
+plot(crank_angles_matrix(:,2), BF_results(:,7), LineWidth=2)
+plot(crank_angles_matrix(:,2), RF_results(:,7), LineWidth=2)
+plot(crank_angles_matrix(:,2), G_results(:,7), LineWidth=2)
 hold off
-title('Plots of muscle velocities versus crank angles')
-xlabel('Crank Angle (degrees)')
-ylabel('Muscle Velocity (m/s)')
-legend('BF','RF','G')
+title('Plots of muscle velocities versus crank angles', FontSize=20)
+xlabel('Crank Angle (degrees)',FontSize=18)
+ylabel('Muscle Velocity (m/s)',FontSize=18)
+legend('BF','RF','G', FontSize=14)
 
+AbsTol = 1e-8;
+RelTol = 1e-6;
+T = 0.666667; % length of simulation
 figure % Plot results from ode45 (consumed energy vs time)
 hold on
-simulate_DE_BF()
-simulate_DE_RF()
-simulate_DE_G()
+simulate_DE_BF(AbsTol,RelTol,T)
+simulate_DE_RF(AbsTol,RelTol,T)
+simulate_DE_G(AbsTol,RelTol,T)
 hold off
-title('Plots of muscle energies versus time')
-xlabel('Time (s)')
-ylabel('Consumed Metabolic Energy (calorie)')
-legend('BF','RF','G')
+title('Plots of muscle energies versus time', FontSize=20)
+xlabel('Time (s)', FontSize=18)
+ylabel('Consumed Metabolic Energy (calorie)', FontSize=18)
+legend('BF','RF','G', FontSize=14)
+
+%%% Numerical Error Testing
+%figure
+%hold on
+%simulate_DE_BF(1e-8,1e-11)
+%simulate_DE_BF(1e-8,1e-8)
+%simulate_DE_BF(1e-8,1e-5)
+%simulate_DE_BF(1e-8,1e-2)
+%title('Plots of muscle energies versus time')
+%xlabel('Time (s)')
+%ylabel('Consumed Metabolic Energy (calorie)')
+%legend('RelTol = 1e-11', 'RelTol = 1e-8', 'RelTol = 1e-5', 'RelTol = 1e-2')
 
 BF_muscle = HillTypeMuscle(100, 0.316, 0.092); % Call hill type class for BF muscle
 BF_total_lm_lt_length = 0.316+0.092; 
@@ -183,11 +198,11 @@ end
 
 figure % Plotting tendon strains
 hold on
-plot(crank_angles_matrix(:,2), BF_tendon_data(:,6));
-plot(crank_angles_matrix(:,2), RF_tendon_data(:,6));
-plot(crank_angles_matrix(:,2), G_tendon_data(:,6));
+plot(crank_angles_matrix(:,2), BF_tendon_data(:,6), LineWidth=2);
+plot(crank_angles_matrix(:,2), RF_tendon_data(:,6), LineWidth=2);
+plot(crank_angles_matrix(:,2), G_tendon_data(:,6), LineWidth=2);
 hold off
-title('Distal Tendon Strain Graph')
-xlabel('Crank Angles (degrees)')
-ylabel('Strain (m/m)')
-legend('BF', 'RF', 'G')
+title('Distal Tendon Strain Graph', FontSize=20)
+xlabel('Crank Angles (degrees)', FontSize=18)
+ylabel('Strain (m/m)', FontSize=18)
+legend('BF', 'RF', 'G', FontSize=14)
