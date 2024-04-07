@@ -1,4 +1,4 @@
-function [max_velocity] = get_max_velocity(alpha)
+function [max_velocity] = get_max_shortening_velocity(alpha)
 
 % Input Parameters
 % data(:,1): samples of an independent variable
