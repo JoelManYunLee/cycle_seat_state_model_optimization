@@ -188,16 +188,4 @@ function [found_alpha_RF] = get_activation_values_RF(crankAngle)
     for i = 1:length(regression_eqn)
         found_alpha_RF = found_alpha_RF + regression_eqn(i)*(crankAngle)^(order+1-i);
     end
-    
-    test = zeros(length(data(:,1)), 1);
-    for i = 1:length(data(:,1))
-        for j = 1:length(regression_eqn)
-            found_alpha_RF = found_alpha_RF + regression_eqn(j)*(data(i,1))^(order+1-j);
-        end
-        test(i) = found_alpha_RF;
-        found_alpha_RF = 0;
-    end
-
-    figure
-    plot(data(:,1),test(:,1))
 end
