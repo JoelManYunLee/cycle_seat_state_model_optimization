@@ -186,8 +186,18 @@ function [found_alpha_RF] = get_activation_values_RF(crankAngle)
     found_alpha_RF = 0;
 
     for i = 1:length(regression_eqn)
-        found_alpha_RF = found_alpha_RF + regression_eqn(i)*(crankAngle)^(order+1-i)
+        found_alpha_RF = found_alpha_RF + regression_eqn(i)*(crankAngle)^(order+1-i);
     end
-    %found_alpha_RF = regression_eqn(1)*(crankAngle)^4 + regression_eqn(2)*(crankAngle)^3 + regression_eqn(3)*(crankAngle)^2 + regression_eqn(4)*(crankAngle)^1 + regression_eqn(5);
-    %found_alpha_RF = regression_eqn(1)*(crankAngle)^10 + regression_eqn(2)*(crankAngle)^9 + regression_eqn(3)*(crankAngle)^8 + regression_eqn(4)*(crankAngle)^7 + regression_eqn(5)*(crankAngle)^6 + regression_eqn(6)*(crankAngle)^5 + regression_eqn(7)*(crankAngle)^4 + regression_eqn(8)*(crankAngle)^3 + regression_eqn(9)*(crankAngle)^2 + regression_eqn(10)*(crankAngle)^1 + regression_eqn(11);
+    
+    test = zeros(length(data(:,1)), 1);
+    for i = 1:length(data(:,1))
+        for j = 1:length(regression_eqn)
+            found_alpha_RF = found_alpha_RF + regression_eqn(j)*(data(i,1))^(order+1-j);
+        end
+        test(i) = found_alpha_RF;
+        found_alpha_RF = 0;
+    end
+
+    figure
+    plot(data(:,1),test(:,1))
 end
