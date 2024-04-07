@@ -143,42 +143,6 @@ xlabel('Time (s)')
 ylabel('Consumed Metabolic Energy (calorie)')
 legend('BF','RF','G')
 
-% Loop for biceps_femoris and rectus_femoris
-for m = 1:numMuscles-1 % Excluding gastrocnemius
-    for j = 1:numJoints
-        for a = 1:numAngles
-            muscle = muscleMatrix{m};
-            joint = jointMatrix{j};
-            joint_angle = jointAnglesMatrix(a, j + 1); % j+1 to account for crank angle column
-
-            muscle_length_change = get_muscle_length_change(muscle, joint, joint_angle);
-
-            resultMatrix(counter, :) = [jointAnglesMatrix(a, 1), m, j, joint_angle, muscle_length_change];
-            counter = counter + 1;
-        end
-    end
-end
-
-% Loop for gastrocnemius muscle
-for j = 2:numJoints % Excluding hip
-    for a = 1:numAngles
-        muscle = muscleMatrix{end}; % gastrocnemius
-        joint = jointMatrix{j};
-        joint_angle = jointAnglesMatrix(a, j + 1); % j+1 to account for crank angle column
-
-        muscle_length_change = get_muscle_length_change(muscle, joint, joint_angle);
-
-        resultMatrix(counter, :) = [jointAnglesMatrix(a, 1), numMuscles, j, joint_angle, muscle_length_change];
-        counter = counter + 1;
-    end
-end
-
-% Col 1: Crank angle
-% Col 2: Muscle (1 = bf, 2 = rf, 3 = g)
-% Col 3: Joint (1 = hip, 2 = knee)
-% Col 4: Joint angle
-% Col 5: Change in muscle length
-
 BF_muscle = HillTypeMuscle(100, 0.316, 0.092); % Call hill type class for BF muscle
 BF_total_lm_lt_length = 0.316+0.092; 
 BF_tendon_data = zeros(numAngles, 6); % Matrix used to compute strain in tendon
