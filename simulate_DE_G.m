@@ -18,7 +18,9 @@ function simulate_DE_G(AbsTol,RelTol,T)
     % Define the differential equation
     function dEdt = dEdt(t, E)
         % Parameters
-        Fo = 1;         % Some constant value for Fo
+        % Data from: Investigation of the dependence of joint contact forces on musculotendon parameters using a codified workflow for image-based modelling
+        % Data from: Bias in self-reported estimates of obesity in Canadian health surveys: an update on correction equations for adults
+        Fo = 1.6339*84.6*9.81; 
         Lo = get_optimal_muscle_length()*0.241; % Normalize length that corresponds to peak force * resting length
         alpha = get_activation_values_G(time_to_crank_angle(t)); % Value of alpha at current crank angle
         Vmax = get_max_shortening_velocity(alpha); % Value of vmax at current alpha
