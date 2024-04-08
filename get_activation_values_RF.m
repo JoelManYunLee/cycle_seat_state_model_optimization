@@ -178,14 +178,8 @@ function [found_alpha_RF] = get_activation_values_RF(crankAngle)
         242.2319475	0.0770
         245.3829322	0.0770 ];
 
-    crank_angles = data(:,1);
-    alpha_RF = data(:,2);
+    %GriddedInterpolant was recommended from matlab documentation on interp1
+    F = griddedInterpolant(data(:,1), data(:,2));
 
-    order = 20;
-    regression_eqn = polyfit(crank_angles, alpha_RF, order);
-    found_alpha_RF = 0;
-
-    for i = 1:length(regression_eqn)
-        found_alpha_RF = found_alpha_RF + regression_eqn(i)*(crankAngle)^(order+1-i);
-    end
+    found_alpha_RF = F(crankAngle);
 end

@@ -179,11 +179,8 @@ function [found_alpha_BF] = get_activation_values_BF(crankAngle)
         347.7816505,	0.047
         349.5435958,	0.052];
 
-    crank_angles = data(:,1);
-    alpha_BF = data(:,2);
+    %GriddedInterpolant was recommended from matlab documentation on interp1
+    F = griddedInterpolant(data(:,1), data(:,2));
 
-    regression_eqn = polyfit(crank_angles, alpha_BF, 4);
-
-    found_alpha_BF = regression_eqn(1)*(crankAngle)^4 + regression_eqn(2)*(crankAngle)^3 + regression_eqn(3)*(crankAngle)^2 + regression_eqn(4)*(crankAngle)^1 + regression_eqn(5);
-    %found_alpha_BF = regression_eqn(1)*(crankAngle)^10 + regression_eqn(2)*(crankAngle)^9 + regression_eqn(3)*(crankAngle)^8 + regression_eqn(4)*(crankAngle)^7 + regression_eqn(5)*(crankAngle)^6 + regression_eqn(6)*(crankAngle)^5 + regression_eqn(7)*(crankAngle)^4 + regression_eqn(8)*(crankAngle)^3 + regression_eqn(9)*(crankAngle)^2 + regression_eqn(10)*(crankAngle)^1 + regression_eqn(11);
+    found_alpha_BF = F(crankAngle);
 end
