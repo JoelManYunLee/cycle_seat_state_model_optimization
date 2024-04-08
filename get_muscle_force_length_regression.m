@@ -24,7 +24,7 @@ function [force_length_regression] = get_muscle_force_length_regression()
 % Matrix below comes from Winters et al. (2011) force-length graph, with normalized length where a length of 1 gives an optimal force value of 1 
 data = [0.22622108	0
         0.102827763	0.017751479
-        0	0.08086785
+        0	        0.08086785
         0.051413882	0.130177515
         0.205655527	0.128205128
         0.205655527	0.140039448

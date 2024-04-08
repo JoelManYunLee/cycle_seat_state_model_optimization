@@ -9,11 +9,11 @@ function tests = test_get_functions %you can only change the name
 tests = functiontests(localfunctions);
 end
 
-%% Define Local Test Functions
-% test function names must begin or end with
-% the case-insensitive word 'test'
+%% Define Local Test Functions.
+% Note that not all "get" functions were tested in this file. This is
+% because some are from the existing "HillTypeMuscle" model, to which no
+% unit tests are required.
 
-%test for real solutions
 function test_activation_values_BF(testCase)
 actSolution = get_activation_values_BF(90.53764031);
 % Answer is taken from the actual data table. Line 53 of
@@ -87,13 +87,6 @@ function test_muscle_length_change(testCase)
     actSolution = get_muscle_length_change('biceps_femoris', 'hip', 90);
     %0.1644 + (0.31078 * 90) + (0.00061 * 90^2) = 33.07764
     expSolution =  33.07764;
-    
-    verifyEqual(testCase,actSolution,expSolution, RelTol=0.05)
-end
-
-function test_optimal_muscle_length(testCase)
-    actSolution = get_optimal_muscle_length();
-    expSolution = 0.984220907;
     
     verifyEqual(testCase,actSolution,expSolution, RelTol=0.05)
 end
