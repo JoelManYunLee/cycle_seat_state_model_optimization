@@ -137,13 +137,11 @@ function [found_alpha_RF] = get_activation_values_RF(crankAngle)
         300.0406508	0.6495
         300.3933238	0.6657
         301.0986697	0.6908
-        301.0986697	0.6782
         301.8040156	0.7078
         302.5093616	0.7374
         303.2147075	0.7608
         303.9200535	0.7913
         304.6253994	0.8289
-        304.6253994	0.8164
         305.3307454	0.8505
         306.0360913	0.8729
         306.7414372	0.8944
@@ -174,9 +172,7 @@ function [found_alpha_RF] = get_activation_values_RF(crankAngle)
         345.8881371	0.7832
         347.298829	0.7661
         348.7095209	0.7455
-        349.7675398	0.7285
-        242.2319475	0.0770
-        245.3829322	0.0770 ];
+        349.7675398	0.7285];
 
     %GriddedInterpolant was recommended from matlab documentation on interp1
     F = griddedInterpolant(data(:,1), data(:,2));
