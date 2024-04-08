@@ -363,9 +363,8 @@ function [velo] = get_G_velocity(crankAngle)
             359	0.016950777
             360	0.016950777 ];
 
-    crank_angles = data(:,1); % crank angles data
-    G_velocity = data(:,2); % G velocity data
+    %GriddedInterpolant was recommended from matlab documentation on interp1
+    F = griddedInterpolant(data(:,1), data(:,2));
 
-    regression_eqn = polyfit(crank_angles, G_velocity, 4); % fit a fourth order polynomial to the data
-    velo = regression_eqn(1)*(crankAngle)^4 + regression_eqn(2)*(crankAngle)^3+ regression_eqn(3)*(crankAngle)^2 + regression_eqn(4)*(crankAngle) + regression_eqn(5); % Find BF_velocity
+    velo = F(crankAngle);
 end
