@@ -7,7 +7,7 @@ function [muscle_length_change] = get_muscle_length_change(muscle, joint, joint_
                     coefficients = [0.16644, 0.31078, 0.00061];
                 case 'knee'
                     coefficients = [0.19826, -0.04600, 0.00000];
-                otherwise
+                    otherwise
                     error('Joint not found for the specified muscle.');
             end
         case 'rectus_femoris'
