@@ -10,7 +10,7 @@ function simulate_DE_RF(AbsTol,RelTol,T)
     options = odeset ('RelTol', RelTol, 'AbsTol', AbsTol);
 
     % Solve the differential equation
-    [t, E] = ode45(@dEdt, tspan, E0);
+    [t, E] = ode45(@dEdt, tspan, E0, options);
 
     % Plot the results
     plot(t, E, LineWidth=2);

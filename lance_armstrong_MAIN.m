@@ -133,7 +133,7 @@ ylabel('Muscle Velocity (m/s)',FontSize=18)
 legend('BF','RF','G', FontSize=14)
 
 AbsTol = 1e-8;
-RelTol = 1e-6;
+RelTol = 1e-8;
 T = 0.666667; % length of simulation
 figure % Plot results from ode45 (consumed energy vs time)
 hold on
@@ -147,17 +147,17 @@ ylabel('Consumed Metabolic Energy (calorie)', FontSize=18)
 legend('BF','RF','G', FontSize=14)
 
 %%% Numerical Error Testing
-figure
-hold on
-simulate_DE_BF(1e-8,1e-11,10)
-simulate_DE_BF(1e-8,1e-8,10)
-simulate_DE_BF(1e-8,1e-5,10)
-simulate_DE_BF(1e-8,1e-2,10)
-hold off
-title('Plots of muscle energies versus time', FontSize=20)
-xlabel('Time (s)', FontSize=18)
-ylabel('Consumed Metabolic Energy (calorie)', FontSize=18)
-legend('RelTol = 1e-11', 'RelTol = 1e-8', 'RelTol = 1e-5', 'RelTol = 1e-2', FontSize=14)
+%figure
+%hold on
+%simulate_DE_BF(1e-8,1e-11,10)
+%simulate_DE_BF(1e-8,1e-8,10)
+%simulate_DE_BF(1e-8,1e-5,10)
+%simulate_DE_BF(1e-8,1e-2,10)
+%hold off
+%title('Plots of muscle energies versus time', FontSize=20)
+%xlabel('Time (s)', FontSize=18)
+%ylabel('Consumed Metabolic Energy (calorie)', FontSize=18)
+%legend('RelTol = 1e-11', 'RelTol = 1e-8', 'RelTol = 1e-5', 'RelTol = 1e-2', FontSize=14)
 
 BF_muscle = HillTypeMuscle(100, 0.316, 0.092); % Call hill type class for BF muscle
 BF_total_lm_lt_length = 0.316+0.092; 
