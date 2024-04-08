@@ -25,7 +25,7 @@ expSolution = 0.621;
 verifyEqual(testCase,actSolution,expSolution, RelTol=0.05)
 end
 
-function test_activation_values_G(testCase) %dont change function input
+function test_activation_values_G(testCase)
 actSolution = get_activation_values_G(90.04020388);
 % Answer is taken from the actual data table. Line 53 of
 % get_activation_values_G.m
@@ -34,7 +34,7 @@ expSolution = 0.628378378;
 verifyEqual(testCase,actSolution,expSolution, RelTol=0.05)
 end
 
-function test_activation_values_RF(testCase) %dont change function input
+function test_activation_values_RF(testCase)
 actSolution = get_activation_values_RF(89.49488661);
 % Answer is taken from the actual data table. Line 54 of
 % get_activation_values_RF.m
