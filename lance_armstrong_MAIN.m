@@ -134,8 +134,8 @@ legend('BF','RF','G', FontSize=14)
 
 AbsTol = 1e-8;
 RelTol = 1e-8;
-T = 0.666667; % length of simulation
-T = 10;
+T = 0.666667; % length of simulation for 1 cycle
+%T = 10; % for 10 second simulation
 figure % Plot results from ode45 (consumed energy vs time)
 hold on
 simulate_DE_BF(AbsTol,RelTol,T)
