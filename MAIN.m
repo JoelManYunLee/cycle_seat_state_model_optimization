@@ -133,7 +133,7 @@ ylabel('Muscle Velocity (m/s)',FontSize=18)
 legend('BF','RF','G', FontSize=14)
 
 AbsTol = 1e-8;
-RelTol = 1e-8;
+RelTol = 1e-6;
 T = 0.666667; % length of simulation for 1 cycle
 %T = 10; % for 10 second simulation
 figure % Plot results from ode45 (consumed energy vs time)
