@@ -10,7 +10,7 @@ function simulate_DE_BF(AbsTol, RelTol, T)
     options = odeset ('RelTol', RelTol, 'AbsTol', AbsTol);
 
     % Solve the differential equation
-    [t, E] = ode45(@dEdt, tspan, E0, options);
+    [t, E] = ode45(@dEdt, tspan, E0); % Add options if looking to reduce error tolerances
 
     % Plot the results
     plot(t, E, LineWidth=2);
